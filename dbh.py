@@ -7,7 +7,7 @@ import json
 root = tk.Tk()
 root.withdraw()
 
-# Overlay files to be removed
+# Overlay files
 overlay_files = ['SteamOverlayVulkanLayer.json',
                  'SteamOverlayVulkanLayer64.json']
 
@@ -15,14 +15,16 @@ overlay_files = ['SteamOverlayVulkanLayer.json',
 steam_path = ''
 dbh_path = ''
 
+print('Searching for previous settings...')
+
+# Open settings.json and retreive data
 try:
-    # Open settings.json and retreive data
     with open('settings.json') as json_file:
         data = json.load(json_file)
         steam_path = data['steamPath']
         dbh_path = data['dbhPath']
 except:
-    print('Unable to open settings.json')
+    print('Previous settings file not found')
 
 
 # Check if steam and dbh file paths exist in json
@@ -54,5 +56,6 @@ for overlay_file in overlay_files:
         print(overlay_file + " not found")
 
 # Launch game
+print('Launching game')
 subprocess.Popen(
     [dbh_path])
